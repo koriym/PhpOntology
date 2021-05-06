@@ -8,8 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class PhpOntologyTest extends TestCase
 {
-    /** @var PhpOntology */
-    protected $phpOntology;
+    protected PhpOntology $phpOntology;
 
     protected function setUp(): void
     {
