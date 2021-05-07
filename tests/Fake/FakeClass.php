@@ -12,7 +12,7 @@ class FakeClass
      *
      * @param string $foo an explanation of foo
      */
-    public function method(string $foo): void
+    public function method(string $foo, $bar): void
     {
     }
 }
