@@ -29,12 +29,6 @@ final class DocParam
     /** @readonly */
     public bool $isOptional;
 
-    /** @readonly */
-    public string $default;
-
-    /** @var ArrayObject<string, string> */
-    private ArrayObject $semanticDictionary;
-
     public function __construct(
         ReflectionParameter $parameter,
         TagParam $tagParam,
@@ -42,10 +36,8 @@ final class DocParam
         $this->name = $parameter->name;
         $this->type = $this->getType($parameter);
         $this->isOptional = $parameter->isOptional();
-        $this->default = $parameter->isDefaultValueAvailable() ? $this->getDefaultString($parameter) : '';
         $this->description = $tagParam->description;
         /** @psalm-suppress MixedPropertyTypeCoercion */
-        $this->semanticDictionary = new ArrayObject();
     }
 
     private function getType(ReflectionParameter $parameter): string
@@ -56,21 +48,5 @@ final class DocParam
         }
 
         return $namedType->getName();
-    }
-
-    private function getDefaultString(ReflectionParameter $parameter): string
-    {
-        /** @var array<mixed>|bool|int|float|string $default */
-        $default = $parameter->getDefaultValue();
-        if (is_array($default)) {
-            return str_replace(PHP_EOL, '', strtolower(var_export($default, true)));
-        }
-
-        $stringDefault = (string) $default;
-        if ($stringDefault) {
-            return $stringDefault;
-        }
-
-        return $this->semanticDictionary[$parameter->name] ?? '';
     }
 }
