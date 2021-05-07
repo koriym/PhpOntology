@@ -20,4 +20,18 @@ class PhpOntologyTest extends TestCase
         $actual = $this->phpOntology;
         $this->assertInstanceOf(PhpOntology::class, $actual);
     }
+
+    public function testInvoke(): void
+    {
+        $phpOntology = ($this->phpOntology)('Koriym\PhpOntology', __DIR__ . '/Fake');
+        foreach ($phpOntology as $class) {
+            $classes = $class();
+            foreach ($classes as $method) {
+                $this->assertInstanceOf(DocMethod::class, $method);
+                foreach ($method->params as $param) {
+                    $this->assertInstanceOf(DocParam::class, $param);
+                }
+            }
+        }
+    }
 }
