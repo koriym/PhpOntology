@@ -8,7 +8,7 @@ Read the words used in arguments, methods, etc. from the source code.
 
 ## Usage
 
-See [demo](docs/demo.php].
+See [demo](docs/demo.php).
 
 ```php
 $phpOntology = (new PhpOntology())('Koriym\PhpOntology', __DIR__ . '/Fake');
