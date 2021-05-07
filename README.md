@@ -1,13 +1,26 @@
-# koriym/php-ontology
+# PhpOntology
+
+Read the words used in arguments, methods, etc. from the source code.
 
 ## Installation
 
     composer install
 
-## Available Commands
+## Usage
 
-    composer test              // Run unit test
-    composer tests             // Test and quality checks
-    composer cs-fix            // Fix the coding style
-    composer sa                // Run static analysys tools
-    composer run-script --list // List all commands
+See [demo](docs/demo.php].
+
+```php
+$phpOntology = (new PhpOntology())('Koriym\PhpOntology', __DIR__ . '/Fake');
+foreach ($phpOntology as $class) {
+    $classes = $class();
+    foreach ($classes as $method) {
+        assert($method instanceof DocMethod);
+        printf("Method name: title:%s type:%s desc:%s\n", $method->name, $method->title, $method->description);
+        foreach ($method->params as $param) {
+            assert($param instanceof DocParam);
+            printf("Param: name:%s type:%s desc:%s\n", $param->name, $param->type, $param->description);
+        }
+    }
+}
+```
