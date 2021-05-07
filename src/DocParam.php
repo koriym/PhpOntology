@@ -4,16 +4,8 @@ declare(strict_types=1);
 
 namespace Koriym\PhpOntology;
 
-use ArrayObject;
 use ReflectionNamedType;
 use ReflectionParameter;
-
-use function is_array;
-use function str_replace;
-use function strtolower;
-use function var_export;
-
-use const PHP_EOL;
 
 final class DocParam
 {
