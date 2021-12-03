@@ -23,7 +23,7 @@ final class DocParam
 
     public function __construct(
         ReflectionParameter $parameter,
-        TagParam $tagParam,
+        TagParam $tagParam
     ) {
         $this->name = $parameter->name;
         $this->type = $this->getType($parameter);
