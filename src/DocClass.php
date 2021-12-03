@@ -9,9 +9,13 @@ use ReflectionClass;
 
 final class DocClass
 {
+    /** @var ReflectionClass<object> */
+    private ReflectionClass $class;
+
     /** @param ReflectionClass<object> $class */
-    public function __construct(private ReflectionClass $class)
+    public function __construct(ReflectionClass $class)
     {
+        $this->class = $class;
     }
 
     /**
