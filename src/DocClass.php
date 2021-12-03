@@ -9,7 +9,7 @@ use ReflectionClass;
 
 final class DocClass
 {
-    /** @var ReflectionClass */
+    /** @var ReflectionClass<object> */
     private ReflectionClass $class;
 
     /** @param ReflectionClass<object> $class */

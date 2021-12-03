@@ -25,9 +25,6 @@ final class DocMethod
      */
     public array $params;
 
-    /** @var ReflectionMethod */
-    private ReflectionMethod $method;
-
     public function __construct(ReflectionMethod $method)
     {
         $this->name = $method->name;
