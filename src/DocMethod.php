@@ -5,8 +5,13 @@ declare(strict_types=1);
 namespace Koriym\PhpOntology;
 
 use phpDocumentor\Reflection\DocBlock;
+use phpDocumentor\Reflection\DocBlock\Tags\InvalidTag;
 use phpDocumentor\Reflection\DocBlockFactory;
 use ReflectionMethod;
+use Throwable;
+
+use function error_log;
+use function sprintf;
 
 final class DocMethod
 {
@@ -32,7 +37,12 @@ final class DocMethod
         $docComment = $method->getDocComment();
         $tagParams = null;
         if ($docComment) {
-            $docblock = $factory->create($docComment);
+            try {
+                $docblock = $factory->create($docComment);
+            } catch (Throwable $e) {
+                return;
+            }
+
             $this->title = $docblock->getSummary();
             $this->description = (string) $docblock->getDescription();
             /** @var  ?array<string, TagParam> $tagParams */
@@ -70,6 +80,11 @@ final class DocMethod
         $params = $docblock->getTagsByName('param');
         /** @var array<DocBlock\Tags\Param> $params */
         foreach ($params as $param) {
+            if ($param instanceof InvalidTag) {
+                error_log(sprintf('InvalidTag: %s', $param->getException()->getMessage()));
+                continue;
+            }
+
             $name = (string) $param->getVariableName();
             $tagParams[$name] = new TagParam((string) $param->getType(), (string) $param->getDescription());
         }
