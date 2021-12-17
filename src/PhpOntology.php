@@ -8,10 +8,6 @@ use Generator;
 use Koriym\Psr4List\Psr4List;
 use ReflectionClass;
 
-use function assert;
-use function class_exists;
-use function interface_exists;
-
 final class PhpOntology
 {
     /**
